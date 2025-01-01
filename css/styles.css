@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Default hidden */
+    height: 100%;
+    background: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.sidebar.show {
+    left: 0; /* Show sidebar */
+}
+
+.nav-link {
+    font-size: 16px;
+    margin-top: 50px;
+    margin: 10px 0;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+/* Main Content */
+.content {
+    margin-left: 0;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.content.expanded {
+    margin-left: 250px;
+}
+
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Responsiveness for Small Screens */
+@media (max-width: 991px) {
+    .sidebar {
+        position: fixed;
+        left: -250px; /* Sidebar hidden initially */
+        margin-top: 50px;
+        top: 0;
+    }
+
+    .sidebar.show {
+        left: 0; /* Show sidebar */
+    }
+
+    .content.expanded {
+        margin-left: 250px; /* Shift content when sidebar is open */
+    }
+}
+
+/* For larger screens (Desktop) */
+@media (min-width: 992px) {
+    .sidebar {
+        left: 0; /* Sidebar is always visible */
+        margin-top: 50px;
+    }
+
+    .content {
+        margin-left: 250px; /* Adjust main content layout */
+    }
+}
+
+
+/* Mengubah warna latar belakang tabel menjadi abu-abu terang */
+table {
+    background-color: #f8f9fa;
+}
+
+/* Mengubah warna latar belakang header menjadi abu-abu gelap */
+table thead {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Menambahkan warna abu-abu terang pada baris */
+table tbody tr:nth-child(even) {
+    background-color: #e9ecef; /* Abu-abu terang */
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Putih */
+}
+
+/* Tombol Edit dan Hapus */
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Menambahkan efek hover pada baris */
+table tbody tr:hover {
+    background-color: #d6d8db; /* Warna abu-abu saat hover */
+}

@@ -1,0 +1,127 @@
+// Variabel untuk warna dan ukuran
+$primary-color: #007bff;
+$secondary-color: #e9ecef;
+$text-color: #333;
+$hover-bg-color: #f7f7f7;
+$card-shadow: rgba(0, 0, 0, 0.1);
+$card-hover-shadow: rgba(0, 0, 0, 0.15);
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    z-index: 1030;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0px 2px 5px $card-shadow;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 56px;
+    left: -250px; // Default tersembunyi
+    background-color: #fff;
+    border-right: 1px solid $secondary-color;
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+
+    .nav-link {
+        color: $text-color;
+        font-weight: 500;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+            background-color: $secondary-color;
+            border-radius: 5px;
+            color: $primary-color;
+        }
+
+        &.active {
+            background-color: $primary-color;
+            color: #fff;
+            border-radius: 5px;
+        }
+    }
+}
+
+.content {
+    margin-left: 0;
+    margin-top: 56px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+
+    display: grid; // Gunakan grid sebagai dasar tata letak
+    gap: 20px; // Jarak antar elemen
+
+    // Default untuk tampilan desktop (3x1)
+    grid-template-columns: repeat(3, 1fr); // Tiga kolom dengan ukuran sama
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px $card-shadow;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px $card-hover-shadow;
+        }
+
+        .card-body {
+            background: linear-gradient(145deg, #f7f7f7, #ffffff);
+            text-align: center;
+
+            h3 {
+                margin: 10px 0;
+                font-size: 2rem;
+
+                @media (max-width: 768px) {
+                    font-size: 1.5rem; // Layar kecil
+                }
+            }
+
+            p {
+                font-size: 0.9rem;
+                color: #777;
+
+                @media (max-width: 768px) {
+                    font-size: 0.8rem; // Layar kecil
+                }
+            }
+        }
+    }
+
+    // Responsif untuk layar kecil (1x1)
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr); // Satu kolom
+        gap: 10px; // Jarak antar elemen lebih kecil
+    }
+}
+
+/* Sidebar Saat Terbuka */
+.sidebar.show {
+    transform: translateX(0);
+}
+
+.content-expanded {
+    margin-left: 250px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        left: -250px;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
