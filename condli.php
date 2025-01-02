@@ -1,3 +1,4 @@
+// Ini Config.php Aslinya :V
 <?php
 $servername = "localhost";  // Ganti dengan server database Anda jika perlu
 $username = "root";         // Ganti dengan username database Anda
