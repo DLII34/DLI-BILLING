@@ -5,13 +5,26 @@ if(!isset($_SESSION['session_username'])){
     exit();
 }
 
-include('config.php'); // Koneksi ke database
+include('condli.php'); // Koneksi ke database
 
 // Menampilkan data customer
 $query = "SELECT * FROM customers";
 $result = $conn->query($query);
 
 $total_customers = $result->num_rows;
+
+// Ambil data jumlah client untuk setiap paket
+$packageQuery = "SELECT paket_mbps.nama, paket_mbps.harga, COUNT(customers.id_client) as total_clients
+                 FROM customers
+                 JOIN paket_mbps ON customers.id_paket = paket_mbps.id_paket
+                 GROUP BY paket_mbps.id_paket";
+$packageResult = $conn->query($packageQuery);
+
+// Hitung pendapatan
+$pendapatan = 0;
+while ($package = $packageResult->fetch_assoc()) {
+    $pendapatan += $package['total_clients'] * $package['harga'];
+}
 
 // Mengambil data jumlah customer per hari
 $query = "SELECT DATE(tanggal_pemasangan) as day, COUNT(*) as total FROM customers GROUP BY DATE(tanggal_pemasangan)";
@@ -89,12 +102,11 @@ $username = $_SESSION['session_username'];
         </div>
     </nav>
 
-    <!-- Sidebar -->
     <div class="d-flex">
         <nav class="sidebar bg-light p-3" id="sidebarMenu">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href=""><i class="fas fa-home"></i> Dashboard</a>
+                    <a class="nav-link active" href="#"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="costumer.php"><i class="fas fa-users"></i> Customer</a>
@@ -103,10 +115,21 @@ $username = $_SESSION['session_username'];
                     <a class="nav-link" href="#"><i class="fas fa-receipt"></i> Invoices</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fab fa-whatsapp"></i> WhatsApp API</a>
+                <a class="nav-link dropdown-toggle" href="#" id="whatsappDropdown" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fab fa-whatsapp"></i> WhatsApp API
+                </a>
+                <ul class="collapse list-unstyled" id="whatsappSubMenu">
+                <li>
+                    <a class="nav-link ms-3 submenu-link" href="setup.php"><i class="fas fa-cogs"></i> Setup</a>
                 </li>
+                <li>
+                    <a class="nav-link ms-3 submenu-link" href="logs.php"><i class="fas fa-file-alt"></i> Logs</a>
+                </li>
+                </ul>
             </ul>
         </nav>
+    </div>
+
 
         <!-- Main Content -->
         <div class="content p-4">
@@ -146,9 +169,19 @@ $username = $_SESSION['session_username'];
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
                             <i class="fas fa-dollar-sign fa-2x text-warning mb-3"></i>
-                            <h5>Earnings</h5>
-                            <h3>Rp.8.000.000</h3>
+                            <h5>Pendapatan</h5>
+                            <h3>Rp <?= number_format($pendapatan, 0, ',', '.') ?></h3>
                             <p class="text-success">New</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center shadow-sm">
+                        <div class="card-body">
+                            <i class="fab fa-whatsapp fa-2x text-success mb-3"></i>
+                            <h5>WhatsApp API</h5>
+                            <h3>status</h3>
+                            <p class="text-success">Online</p>
                         </div>
                     </div>
                 </div>
