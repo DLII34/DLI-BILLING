@@ -87,6 +87,11 @@ $username = $_SESSION['session_username'];
                     </ul>
                 </div>
 
+                <!-- Name -->
+                <div class="name me-3">
+                    <h5><?php echo htmlspecialchars($username); ?></h5>
+                </div>
+
                 <!-- Profile -->
                 <div class="dropdown">
                     <a class="d-flex align-items-center text-decoration-none" href="#" id="profileDropdown" data-bs-toggle="dropdown">
@@ -102,11 +107,15 @@ $username = $_SESSION['session_username'];
         </div>
     </nav>
 
+    <!-- Sidebar -->
     <div class="d-flex">
         <nav class="sidebar bg-light p-3" id="sidebarMenu">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="fas fa-home"></i> Dashboard</a>
+                    <a class="nav-link active" href=""><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="paket.php"><i class="fa-solid fa-computer"></i> Paket Kecepatan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="costumer.php"><i class="fas fa-users"></i> Customer</a>
@@ -130,16 +139,15 @@ $username = $_SESSION['session_username'];
         </nav>
     </div>
 
-
         <!-- Main Content -->
         <div class="content p-4">
-		<h3 class="mb-3">Welcome, <?php echo htmlspecialchars($username); ?>!</h3>
+		<h3 class="mb-3">Dashboard</h3>
             <div class="row mt-4">
                 <div class="col-md-4">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-wallet fa-2x text-danger mb-3"></i>
-                            <h5>Total Unpaid</h5>
+                            <i class="fas fa-wallet fa-2x text-primary mb-3"></i>
+                            <h5>Total Paid</h5>
                             <h3>234</h3>
                             <p class="text-danger">⬇ 5%</p>
                         </div>
@@ -148,8 +156,8 @@ $username = $_SESSION['session_username'];
                 <div class="col-md-4">
                     <div class="card text-center shadow-sm">
                         <div class="card-body">
-                            <i class="fas fa-wallet fa-2x text-primary mb-3"></i>
-                            <h5>Total Paid</h5>
+                            <i class="fas fa-wallet fa-2x text-danger mb-3"></i>
+                            <h5>Total Unpaid</h5>
                             <h3>234</h3>
                             <p class="text-danger">⬇ 5%</p>
                         </div>
@@ -246,5 +254,11 @@ $username = $_SESSION['session_username'];
         }
     });
 </script>
+
+<footer class="text-center mt-5">
+    <p>&copy; 2025 DLI-billing. All rights reserved.</p>
+</footer>
+
+
 </body>
 </html>
