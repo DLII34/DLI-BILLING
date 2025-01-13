@@ -83,39 +83,3 @@ body {
     }
 }
 
-
-/* Mengubah warna latar belakang tabel menjadi abu-abu terang */
-table {
-    background-color: #f8f9fa;
-}
-
-/* Mengubah warna latar belakang header menjadi abu-abu gelap */
-table thead {
-    background-color: #6c757d;
-    color: white;
-}
-
-/* Menambahkan warna abu-abu terang pada baris */
-table tbody tr:nth-child(even) {
-    background-color: #e9ecef; /* Abu-abu terang */
-}
-
-table tbody tr:nth-child(odd) {
-    background-color: #ffffff; /* Putih */
-}
-
-/* Tombol Edit dan Hapus */
-.btn-warning {
-    background-color: #ffc107;
-    color: white;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-}
-
-/* Menambahkan efek hover pada baris */
-table tbody tr:hover {
-    background-color: #d6d8db; /* Warna abu-abu saat hover */
-}
